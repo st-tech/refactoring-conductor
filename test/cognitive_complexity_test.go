@@ -10,7 +10,6 @@ import (
 func TestCognitiveComplexity(t *testing.T) {
 	filename := "testdata/test.vbs"
 
-	// ファイルオープン
 	fp, err := os.Open(filename)
 	if err != nil {
 		fmt.Printf("err: %v", err)
@@ -20,11 +19,10 @@ func TestCognitiveComplexity(t *testing.T) {
 	scanner := bufio.NewScanner(fp)
 
 	for scanner.Scan() {
-		// ここで一行ずつ処理
 		fmt.Println(scanner.Text())
 	}
 
 	if err = scanner.Err(); err != nil {
-		// エラー処理
+		fmt.Printf("err: %v", err)
 	}
 }
