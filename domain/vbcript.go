@@ -7,4 +7,6 @@ const VBScriptOperatorPattern = ``
 
 // VBScript is to set VBScript Code Architecture.
 type VBScript struct {
+	NestState           int
+	CognitiveComplexity int
 }

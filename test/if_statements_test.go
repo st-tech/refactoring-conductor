@@ -3,6 +3,7 @@ package test_test
 import (
 	"testing"
 
+	"github.com/st-tech/search-tools/2020internship-yoshikawa/src/domain"
 	"github.com/st-tech/search-tools/2020internship-yoshikawa/src/internal"
 )
 
@@ -22,6 +23,8 @@ func TestIfStatements(t *testing.T) {
 func TestIfStatementsSingleState(t *testing.T) {
 	var expectedCognitiveComplexity = 1
 	var testCode = `If i=10 Then alert("Hello")`
+	vbscript := domain.VBScript{}
+	vbscript.NestState = 0
 
 	if v := internal.CountControlFlow(testCode); expectedCognitiveComplexity != v {
 		t.Errorf("wrong output: got %v, expected %v", v, expectedCognitiveComplexity)
