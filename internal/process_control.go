@@ -9,18 +9,16 @@ import (
 
 // CountControlFlow is to count Control Flow statements.
 func CountControlFlow(vbscript domain.VBScript, str string) int {
-	var cognitiveComplexityCount = 0
-
+	var count = 0
 	isIf, err := regexp.MatchString(domain.VBScriptControlFlowPattern, str)
 	if err != nil {
 		fmt.Printf("err: %v", err)
 	}
 
-	fmt.Printf("%v\n", isIf)
 	if isIf {
 		vbscript.CognitiveComplexity++
-		cognitiveComplexityCount++
+		count++
 	}
 
-	return cognitiveComplexityCount
+	return count
 }
