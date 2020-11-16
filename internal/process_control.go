@@ -8,17 +8,35 @@ import (
 )
 
 // CountControlFlow is to count Control Flow statements.
-func CountControlFlow(vbscript domain.VBScript, str string) int {
+func CountControlFlow(vbscript *domain.VBScript, str string) int {
 	var count = 0
-	isIf, err := regexp.MatchString(domain.VBScriptControlFlowPattern, str)
+	isIf, err := regexp.MatchString(domain.VBScriptIfPattern, str)
 	if err != nil {
 		fmt.Printf("err: %v", err)
 	}
 
-	if isIf {
-		vbscript.CognitiveComplexity++
-		count++
+	isElse, err := regexp.MatchString(domain.VBScriptElsePattern, str)
+	if err != nil {
+		fmt.Printf("err: %v", err)
 	}
+
+	isEndIf, err := regexp.MatchString(domain.VBScriptEndIfPattern, str)
+	if err != nil {
+		fmt.Printf("err: %v", err)
+	}
+
+	if isIf && isEndIf {
+		vbscript.NestState--
+	} else if isIf {
+		vbscript.CognitiveComplexity++
+		vbscript.CognitiveComplexity += vbscript.NestState
+		count += vbscript.NestState
+		vbscript.NestState++
+	} else if isElse {
+		vbscript.CognitiveComplexity++
+	}
+
+	fmt.Printf("%v\n", vbscript)
 
 	return count
 }

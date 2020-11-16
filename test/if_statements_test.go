@@ -12,7 +12,7 @@ func TestIfStatements(t *testing.T) {
 	filename := "testdata/if.vbs"
 	vbscript := domain.VBScript{}
 
-	vbscript.CognitiveComplexity = internal.Read(filename, vbscript)
+	vbscript.CognitiveComplexity = internal.Read(filename, &vbscript)
 
 	if expectedCognitiveComplexity != vbscript.CognitiveComplexity {
 		t.Errorf("wrong output: got %v, expected %v", vbscript.CognitiveComplexity, expectedCognitiveComplexity)
@@ -25,7 +25,7 @@ func TestIfStatementsSingleState(t *testing.T) {
 	vbscript := domain.VBScript{}
 	vbscript.NestState = 0
 
-	vbscript.CognitiveComplexity = internal.Read(filename, vbscript)
+	vbscript.CognitiveComplexity = internal.Read(filename, &vbscript)
 
 	if expectedCognitiveComplexity != vbscript.CognitiveComplexity {
 		t.Errorf("wrong output: got %v, expected %v", vbscript.CognitiveComplexity, expectedCognitiveComplexity)
@@ -38,7 +38,7 @@ func TestIfStatementsNest(t *testing.T) {
 	vbscript := domain.VBScript{}
 	vbscript.NestState = 0
 
-	vbscript.CognitiveComplexity = internal.Read(filename, vbscript)
+	vbscript.CognitiveComplexity = internal.Read(filename, &vbscript)
 
 	if expectedCognitiveComplexity != vbscript.CognitiveComplexity {
 		t.Errorf("wrong output: got %v, expected %v", vbscript.CognitiveComplexity, expectedCognitiveComplexity)
@@ -51,7 +51,7 @@ func TestIfStatementsTripleNest(t *testing.T) {
 	vbscript := domain.VBScript{}
 	vbscript.NestState = 0
 
-	vbscript.CognitiveComplexity = internal.Read(filename, vbscript)
+	vbscript.CognitiveComplexity = internal.Read(filename, &vbscript)
 
 	if expectedCognitiveComplexity != vbscript.CognitiveComplexity {
 		t.Errorf("wrong output: got %v, expected %v", vbscript.CognitiveComplexity, expectedCognitiveComplexity)
