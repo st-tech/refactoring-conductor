@@ -11,4 +11,5 @@ const VBScriptOperatorPattern = ``
 type VBScript struct {
 	NestState           int
 	CognitiveComplexity int
+	Maintainability     int
 }

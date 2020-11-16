@@ -8,6 +8,7 @@ import (
 	"github.com/st-tech/search-tools/2020internship-yoshikawa/src/domain"
 )
 
+// Read is to read file and scan it line by line.
 func Read(filename string, vbscript *domain.VBScript) int {
 	fp, err := os.Open(filename)
 	if err != nil {

@@ -36,7 +36,5 @@ func CountControlFlow(vbscript *domain.VBScript, str string) int {
 		vbscript.CognitiveComplexity++
 	}
 
-	fmt.Printf("%v\n", vbscript)
-
 	return count
 }
