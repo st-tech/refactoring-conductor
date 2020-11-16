@@ -1,9 +1,6 @@
 package test_test
 
 import (
-	"bufio"
-	"fmt"
-	"os"
 	"testing"
 
 	"github.com/st-tech/search-tools/2020internship-yoshikawa/src/domain"
@@ -15,21 +12,7 @@ func TestIfStatements(t *testing.T) {
 	filename := "testdata/if.vbs"
 	vbscript := domain.VBScript{}
 
-	fp, err := os.Open(filename)
-	if err != nil {
-		fmt.Printf("err: %v", err)
-	}
-	defer fp.Close()
-
-	scanner := bufio.NewScanner(fp)
-
-	for scanner.Scan() {
-		internal.CountControlFlow(vbscript, scanner.Text())
-	}
-
-	if err = scanner.Err(); err != nil {
-		fmt.Printf("err: %v", err)
-	}
+	internal.Read(filename, vbscript)
 
 	if expectedCognitiveComplexity != vbscript.CognitiveComplexity {
 		t.Errorf("wrong output: got %v, expected %v", vbscript.CognitiveComplexity, expectedCognitiveComplexity)
@@ -42,21 +25,7 @@ func TestIfStatementsSingleState(t *testing.T) {
 	vbscript := domain.VBScript{}
 	vbscript.NestState = 0
 
-	fp, err := os.Open(filename)
-	if err != nil {
-		fmt.Printf("err: %v", err)
-	}
-	defer fp.Close()
-
-	scanner := bufio.NewScanner(fp)
-
-	for scanner.Scan() {
-		internal.CountControlFlow(vbscript, scanner.Text())
-	}
-
-	if err = scanner.Err(); err != nil {
-		fmt.Printf("err: %v", err)
-	}
+	internal.Read(filename, vbscript)
 
 	if expectedCognitiveComplexity != vbscript.CognitiveComplexity {
 		t.Errorf("wrong output: got %v, expected %v", vbscript.CognitiveComplexity, expectedCognitiveComplexity)
@@ -69,21 +38,7 @@ func TestIfStatementsNest(t *testing.T) {
 	vbscript := domain.VBScript{}
 	vbscript.NestState = 0
 
-	fp, err := os.Open(filename)
-	if err != nil {
-		fmt.Printf("err: %v", err)
-	}
-	defer fp.Close()
-
-	scanner := bufio.NewScanner(fp)
-
-	for scanner.Scan() {
-		internal.CountControlFlow(vbscript, scanner.Text())
-	}
-
-	if err = scanner.Err(); err != nil {
-		fmt.Printf("err: %v", err)
-	}
+	internal.Read(filename, vbscript)
 
 	if expectedCognitiveComplexity != vbscript.CognitiveComplexity {
 		t.Errorf("wrong output: got %v, expected %v", vbscript.CognitiveComplexity, expectedCognitiveComplexity)
@@ -96,21 +51,7 @@ func TestIfStatementsTripleNest(t *testing.T) {
 	vbscript := domain.VBScript{}
 	vbscript.NestState = 0
 
-	fp, err := os.Open(filename)
-	if err != nil {
-		fmt.Printf("err: %v", err)
-	}
-	defer fp.Close()
-
-	scanner := bufio.NewScanner(fp)
-
-	for scanner.Scan() {
-		internal.CountControlFlow(vbscript, scanner.Text())
-	}
-
-	if err = scanner.Err(); err != nil {
-		fmt.Printf("err: %v", err)
-	}
+	internal.Read(filename, vbscript)
 
 	if expectedCognitiveComplexity != vbscript.CognitiveComplexity {
 		t.Errorf("wrong output: got %v, expected %v", vbscript.CognitiveComplexity, expectedCognitiveComplexity)
