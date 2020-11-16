@@ -1,0 +1,1 @@
+If i=10 Then alert("Hello")

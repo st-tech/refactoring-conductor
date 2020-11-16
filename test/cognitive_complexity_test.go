@@ -8,7 +8,7 @@ import (
 )
 
 func TestCognitiveComplexity(t *testing.T) {
-	filename := "testdata/test.vbs"
+	filename := "testdata/if.vbs"
 
 	fp, err := os.Open(filename)
 	if err != nil {
