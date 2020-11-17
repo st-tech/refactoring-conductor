@@ -69,3 +69,15 @@ func TestIfStatementsTripleNest(t *testing.T) {
 		t.Errorf("wrong output: got %v, expected %v", vbscript.CognitiveComplexity, expectedCognitiveComplexity)
 	}
 }
+
+func TestIfEndStatements(t *testing.T) {
+	var expectedCognitiveComplexity = 2
+	filename := "testdata/if_end.vbs"
+	vbscript := domain.VBScript{}
+
+	vbscript.CognitiveComplexity = internal.Read(filename, &vbscript)
+
+	if expectedCognitiveComplexity != vbscript.CognitiveComplexity {
+		t.Errorf("wrong output: got %v, expected %v", vbscript.CognitiveComplexity, expectedCognitiveComplexity)
+	}
+}
