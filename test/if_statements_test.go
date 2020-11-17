@@ -19,6 +19,18 @@ func TestIfStatements(t *testing.T) {
 	}
 }
 
+func TestElseIfStatements(t *testing.T) {
+	var expectedCognitiveComplexity = 3
+	filename := "testdata/elseif.vbs"
+	vbscript := domain.VBScript{}
+
+	vbscript.CognitiveComplexity = internal.Read(filename, &vbscript)
+
+	if expectedCognitiveComplexity != vbscript.CognitiveComplexity {
+		t.Errorf("wrong output: got %v, expected %v", vbscript.CognitiveComplexity, expectedCognitiveComplexity)
+	}
+}
+
 func TestIfStatementsSingleState(t *testing.T) {
 	var expectedCognitiveComplexity = 1
 	filename := "testdata/if_single_line.vbs"
