@@ -25,7 +25,7 @@ func CountControlFlow(vbscript *domain.VBScript, str string) int {
 		fmt.Printf("err: %v", err)
 	}
 
-	if isIf && isEndIf {
+	if isEndIf {
 		vbscript.NestState--
 	} else if isIf && !isElse {
 		vbscript.CognitiveComplexity++
