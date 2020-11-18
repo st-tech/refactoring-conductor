@@ -16,4 +16,13 @@ type VBScript struct {
 	CognitiveComplexity int
 	Maintainability     int
 	FunctionName        string
+	isBeginFunction     bool
+	Functions           []Function
+}
+
+// Function is to set function state to VBSCript.
+type Function struct {
+	NestState           int
+	CognitiveComplexity int
+	FunctionName        string
 }
