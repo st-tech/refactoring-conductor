@@ -32,11 +32,11 @@ func TestTwoFunctionStatements(t *testing.T) {
 		t.Errorf("wrong output: got %v, expected %v", vbscript.CognitiveComplexity, expectedCognitiveComplexity)
 	}
 
-	if expectedFirstCognitiveComplexity != vbscript.CognitiveComplexity {
-		t.Errorf("wrong output: got %v, expected %v", vbscript.CognitiveComplexity, expectedFirstCognitiveComplexity)
+	if vbscript.Functions[0].CognitiveComplexity != vbscript.CognitiveComplexity {
+		t.Errorf("wrong output: got %v, expected %v", vbscript.Functions[0].CognitiveComplexity, expectedFirstCognitiveComplexity)
 	}
 
-	if expectedSecondCognitiveComplexity != vbscript.CognitiveComplexity {
-		t.Errorf("wrong output: got %v, expected %v", vbscript.CognitiveComplexity, expectedSecondCognitiveComplexity)
+	if vbscript.Functions[1].CognitiveComplexity != vbscript.CognitiveComplexity {
+		t.Errorf("wrong output: got %v, expected %v", vbscript.Functions[1].CognitiveComplexity, expectedSecondCognitiveComplexity)
 	}
 }

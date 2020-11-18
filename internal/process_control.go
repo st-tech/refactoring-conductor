@@ -49,13 +49,24 @@ func CountControlFlow(vbscript *domain.VBScript, str string) int {
 
 	if isEndIf {
 		vbscript.NestState--
+		if vbscript.IsBeginFunction {
+			vbscript.Functions[len(vbscript.Functions)-1].NestState--
+		}
 	} else if isIf && !isElse {
 		vbscript.CognitiveComplexity++
 		vbscript.CognitiveComplexity += vbscript.NestState
 		count += vbscript.NestState
+		if vbscript.IsBeginFunction {
+			vbscript.Functions[len(vbscript.Functions)-1].CognitiveComplexity++
+			vbscript.Functions[len(vbscript.Functions)-1].CognitiveComplexity += vbscript.NestState
+			vbscript.Functions[len(vbscript.Functions)-1].NestState++
+		}
 		vbscript.NestState++
 	} else if isElse {
 		vbscript.CognitiveComplexity++
+		if vbscript.IsBeginFunction {
+			vbscript.Functions[len(vbscript.Functions)-1].CognitiveComplexity++
+		}
 	}
 
 	return count
