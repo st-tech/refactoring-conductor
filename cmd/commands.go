@@ -24,6 +24,8 @@ var rootCmd = &cobra.Command{
 
 		fmt.Printf("CognitiveComplexity: %d\n", vbscript.CognitiveComplexity)
 
+		fmt.Printf("%v\n", vbscript)
+
 		return nil
 	},
 }
