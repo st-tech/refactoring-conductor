@@ -47,26 +47,30 @@ func CountControlFlow(vbscript *domain.VBScript, str string) {
 		vbscript.Functions = append(vbscript.Functions, slice)
 	}
 
-	if isEndIf {
-		vbscript.NestState--
-		if vbscript.IsBeginFunction {
+	if vbscript.IsBeginFunction {
+		if isEndIf {
+			vbscript.NestState--
 			vbscript.Functions[len(vbscript.Functions)-1].NestState--
-		}
-	} else if isIf && !isElse {
-		vbscript.CognitiveComplexity++
-		vbscript.CognitiveComplexity += vbscript.NestState
-		vbscript.NestState++
-
-		if vbscript.IsBeginFunction {
+		} else if isIf && !isElse {
+			vbscript.CognitiveComplexity++
+			vbscript.CognitiveComplexity += vbscript.NestState
+			vbscript.NestState++
 			vbscript.Functions[len(vbscript.Functions)-1].CognitiveComplexity++
-			// Add (NestState -1), Because added vbscript.NestState++
-			vbscript.Functions[len(vbscript.Functions)-1].CognitiveComplexity += (vbscript.NestState - 1)
+			vbscript.Functions[len(vbscript.Functions)-1].CognitiveComplexity += vbscript.Functions[len(vbscript.Functions)-1].NestState
 			vbscript.Functions[len(vbscript.Functions)-1].NestState++
-		}
-	} else if isElse {
-		vbscript.CognitiveComplexity++
-		if vbscript.IsBeginFunction {
+		} else if isElse {
+			vbscript.CognitiveComplexity++
 			vbscript.Functions[len(vbscript.Functions)-1].CognitiveComplexity++
+		}
+	} else { // Function外の計算を行う
+		if isEndIf {
+			vbscript.NestState--
+		} else if isIf && !isElse {
+			vbscript.CognitiveComplexity++
+			vbscript.CognitiveComplexity += vbscript.NestState
+			vbscript.NestState++
+		} else if isElse {
+			vbscript.CognitiveComplexity++
 		}
 	}
 }
