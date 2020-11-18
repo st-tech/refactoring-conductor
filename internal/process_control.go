@@ -25,6 +25,16 @@ func CountControlFlow(vbscript *domain.VBScript, str string) int {
 		fmt.Printf("err: %v", err)
 	}
 
+	// isFunction, err := regexp.MatchString(domain.VBScriptFunctionPattern, str)
+	// if err != nil {
+	// 	fmt.Printf("err: %v", err)
+	// }
+
+	// isEndFunction, err := regexp.MatchString(domain.VBScriptEndFunctionPattern, str)
+	// if err != nil {
+	// 	fmt.Printf("err: %v", err)
+	// }
+
 	if isEndIf {
 		vbscript.NestState--
 	} else if isIf && !isElse {
