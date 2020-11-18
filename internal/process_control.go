@@ -3,6 +3,7 @@ package internal
 import (
 	"fmt"
 	"regexp"
+	"strings"
 
 	"github.com/st-tech/search-tools/2020internship-yoshikawa/src/domain"
 )
@@ -25,15 +26,21 @@ func CountControlFlow(vbscript *domain.VBScript, str string) int {
 		fmt.Printf("err: %v", err)
 	}
 
-	// isFunction, err := regexp.MatchString(domain.VBScriptFunctionPattern, str)
-	// if err != nil {
-	// 	fmt.Printf("err: %v", err)
-	// }
+	isFunction, err := regexp.MatchString(domain.VBScriptFunctionPattern, str)
+	if err != nil {
+		fmt.Printf("err: %v", err)
+	}
 
-	// isEndFunction, err := regexp.MatchString(domain.VBScriptEndFunctionPattern, str)
-	// if err != nil {
-	// 	fmt.Printf("err: %v", err)
-	// }
+	isEndFunction, err := regexp.MatchString(domain.VBScriptEndFunctionPattern, str)
+	if err != nil {
+		fmt.Printf("err: %v", err)
+	}
+
+	if isEndFunction {
+		fmt.Println(vbscript.CognitiveComplexity)
+	} else if isFunction && !isEndFunction {
+		vbscript.FunctionName = strings.Trim(str, "Function ")
+	}
 
 	if isEndIf {
 		vbscript.NestState--

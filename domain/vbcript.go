@@ -15,12 +15,5 @@ type VBScript struct {
 	NestState           int
 	CognitiveComplexity int
 	Maintainability     int
-	Functions           []FunctionState
-}
-
-// FunctionState is to set function states.
-type FunctionState struct {
-	Name                string
-	NestState           int
-	CognitiveComplexity int
+	FunctionName        string
 }

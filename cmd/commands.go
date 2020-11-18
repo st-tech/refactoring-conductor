@@ -20,7 +20,7 @@ var rootCmd = &cobra.Command{
 
 		vbscript := domain.VBScript{}
 
-		vbscript.CognitiveComplexity = internal.Read(args[0], &vbscript)
+		internal.Read(args[0], &vbscript)
 
 		fmt.Printf("CognitiveComplexity: %d\n", vbscript.CognitiveComplexity)
 

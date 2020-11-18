@@ -21,10 +21,10 @@ func TestFunctionStatements(t *testing.T) {
 	}
 
 	if expectedFirstCognitiveComplexity != vbscript.CognitiveComplexity {
-		t.Errorf("wrong output: got %v, expected %v", vbscript.Functions[0].CognitiveComplexity, expectedFirstCognitiveComplexity)
+		t.Errorf("wrong output: got %v, expected %v", vbscript.CognitiveComplexity, expectedFirstCognitiveComplexity)
 	}
 
 	if expectedSecondCognitiveComplexity != vbscript.CognitiveComplexity {
-		t.Errorf("wrong output: got %v, expected %v", vbscript.Functions[1].CognitiveComplexity, expectedSecondCognitiveComplexity)
+		t.Errorf("wrong output: got %v, expected %v", vbscript.CognitiveComplexity, expectedSecondCognitiveComplexity)
 	}
 }
