@@ -3,7 +3,6 @@ package internal
 import (
 	"fmt"
 	"regexp"
-	"strings"
 
 	"github.com/st-tech/search-tools/2020internship-yoshikawa/src/domain"
 )
@@ -37,9 +36,9 @@ func CountControlFlow(vbscript *domain.VBScript, str string) int {
 	}
 
 	if isEndFunction {
-		fmt.Println(vbscript.CognitiveComplexity)
+		vbscript.IsBeginFunction = false
 	} else if isFunction && !isEndFunction {
-		vbscript.FunctionName = strings.Trim(str, "Function ")
+		vbscript.IsBeginFunction = true
 	}
 
 	if isEndIf {

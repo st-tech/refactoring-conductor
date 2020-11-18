@@ -15,8 +15,7 @@ type VBScript struct {
 	NestState           int
 	CognitiveComplexity int
 	Maintainability     int
-	FunctionName        string
-	isBeginFunction     bool
+	IsBeginFunction     bool
 	Functions           []Function
 }
 
