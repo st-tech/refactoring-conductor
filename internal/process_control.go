@@ -8,8 +8,8 @@ import (
 )
 
 // CountControlFlow is to count Control Flow statements.
-func CountControlFlow(vbscript *domain.VBScript, str string) int {
-	var count = 0
+func CountControlFlow(vbscript *domain.VBScript, str string) {
+
 	isIf, err := regexp.MatchString(domain.VBScriptIfPattern, str)
 	if err != nil {
 		fmt.Printf("err: %v", err)
@@ -55,19 +55,18 @@ func CountControlFlow(vbscript *domain.VBScript, str string) int {
 	} else if isIf && !isElse {
 		vbscript.CognitiveComplexity++
 		vbscript.CognitiveComplexity += vbscript.NestState
-		count += vbscript.NestState
+		vbscript.NestState++
+
 		if vbscript.IsBeginFunction {
 			vbscript.Functions[len(vbscript.Functions)-1].CognitiveComplexity++
-			vbscript.Functions[len(vbscript.Functions)-1].CognitiveComplexity += vbscript.NestState
+			// Add (NestState -1), Because added vbscript.NestState++
+			vbscript.Functions[len(vbscript.Functions)-1].CognitiveComplexity += (vbscript.NestState - 1)
 			vbscript.Functions[len(vbscript.Functions)-1].NestState++
 		}
-		vbscript.NestState++
 	} else if isElse {
 		vbscript.CognitiveComplexity++
 		if vbscript.IsBeginFunction {
 			vbscript.Functions[len(vbscript.Functions)-1].CognitiveComplexity++
 		}
 	}
-
-	return count
 }
