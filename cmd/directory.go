@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"regexp"
 
 	"github.com/spf13/cobra"
 	"github.com/st-tech/search-tools/2020internship-yoshikawa/src/domain"
@@ -27,9 +28,16 @@ var directoryCommand = &cobra.Command{
 		for _, file := range files {
 			vbscript := domain.VBScript{}
 
-			internal.Read(file, &vbscript)
-			fmt.Printf("CognitiveComplexity: %d\n", vbscript.CognitiveComplexity)
-			fmt.Printf("%+v\n", vbscript)
+			isVBScript, err := regexp.MatchString(domain.VBScriptFileExtension, file)
+			if err != nil {
+				fmt.Printf("err: %v", err)
+			}
+
+			if isVBScript {
+				internal.Read(file, &vbscript)
+				fmt.Printf("CognitiveComplexity: %d\n", vbscript.CognitiveComplexity)
+				fmt.Printf("%+v\n", vbscript)
+			}
 		}
 	},
 }

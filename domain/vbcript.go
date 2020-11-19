@@ -11,7 +11,7 @@ const (
 )
 
 // VBScriptFileExtension defines the VBSCript file extensions.
-const VBScriptFileExtension = `$(?i)(\.wsf|\.vbs|\.asp|\.inc)`
+const VBScriptFileExtension = `(?i)(.wsf|.vbs|.asp|.inc)$`
 
 // VBScript is to set VBScript Code Architecture.
 type VBScript struct {
