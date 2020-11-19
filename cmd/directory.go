@@ -21,10 +21,11 @@ var directoryCommand = &cobra.Command{
 		}
 
 		files := internal.DirectoryInternalFiles(args[0])
-		VBScriptJSON := domain.VBScriptJson{}
+		VBScriptJSON := domain.VBScriptJSON{}
 
 		for _, file := range files {
 			vbscript := domain.VBScript{}
+			vbscript.FileName = file
 
 			isVBScript, err := regexp.MatchString(domain.VBScriptFileExtension, file)
 			if err != nil {
@@ -33,8 +34,8 @@ var directoryCommand = &cobra.Command{
 
 			if isVBScript {
 				internal.Read(file, &vbscript)
+				VBScriptJSON.VBScript = append(VBScriptJSON.VBScript, vbscript)
 			}
-			VBScriptJSON.VBScript = append(VBScriptJSON.VBScript, vbscript)
 		}
 
 		jsonBytes, err := json.Marshal(VBScriptJSON)

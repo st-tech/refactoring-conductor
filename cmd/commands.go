@@ -20,10 +20,11 @@ var rootCmd = &cobra.Command{
 			return nil
 		}
 
-		VBScriptJSON := domain.VBScriptJson{}
+		VBScriptJSON := domain.VBScriptJSON{}
 
 		for _, arg := range args {
 			vbscript := domain.VBScript{}
+			vbscript.FileName = arg
 
 			internal.Read(arg, &vbscript)
 			VBScriptJSON.VBScript = append(VBScriptJSON.VBScript, vbscript)

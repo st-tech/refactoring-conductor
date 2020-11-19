@@ -13,21 +13,23 @@ const (
 // VBScriptFileExtension defines the VBSCript file extensions.
 const VBScriptFileExtension = `(?i)(.wsf|.vbs|.asp|.inc)$`
 
-type VBScriptJson struct {
+// VBScriptJSON defines the VBScript JSON.
+type VBScriptJSON struct {
 	VBScript []VBScript
 }
 
 // VBScript is to set VBScript Code Architecture.
 type VBScript struct {
-	NestState           int  `json:"nest_state"`
-	CognitiveComplexity int  `json:"cognitive_complexity"`
-	IsBeginFunction     bool `json:"is_begin_function"`
+	FileName            string `json:"file_name"`
+	NestState           int    `json:"-"`
+	CognitiveComplexity int    `json:"cognitive_complexity"`
+	IsBeginFunction     bool   `json:"-"`
 	Functions           []Function
 }
 
 // Function is to set function state to VBSCript.
 type Function struct {
-	NestState           int    `json:"nest_state"`
+	NestState           int    `json:"-"`
 	CognitiveComplexity int    `json:"cognitive_complexity"`
 	FunctionName        string `json:"function_name"`
 }
