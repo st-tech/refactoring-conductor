@@ -1,6 +1,8 @@
 package cmd
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
 	"os"
 
@@ -18,13 +20,23 @@ var rootCmd = &cobra.Command{
 			return nil
 		}
 
+		VBScriptJSON := domain.VBScriptJson{}
+
 		for _, arg := range args {
 			vbscript := domain.VBScript{}
 
 			internal.Read(arg, &vbscript)
-			fmt.Printf("File Name: %s\n", arg)
-			fmt.Printf("%+v\n", vbscript)
+			VBScriptJSON.VBScript = append(VBScriptJSON.VBScript, vbscript)
 		}
+
+		jsonBytes, err := json.Marshal(VBScriptJSON)
+		if err != nil {
+			fmt.Println("JSON Marshal error:", err)
+		}
+
+		out := new(bytes.Buffer)
+		json.Indent(out, jsonBytes, "", " ")
+		fmt.Println(out.String())
 
 		return nil
 	},

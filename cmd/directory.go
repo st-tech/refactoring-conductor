@@ -21,7 +21,7 @@ var directoryCommand = &cobra.Command{
 		}
 
 		files := internal.DirectoryInternalFiles(args[0])
-		VBScriptJson := domain.VBScriptJson{}
+		VBScriptJSON := domain.VBScriptJson{}
 
 		for _, file := range files {
 			vbscript := domain.VBScript{}
@@ -33,18 +33,16 @@ var directoryCommand = &cobra.Command{
 
 			if isVBScript {
 				internal.Read(file, &vbscript)
-				fmt.Printf("%+v\n", vbscript)
 			}
-			VBScriptJson.VBScript = append(VBScriptJson.VBScript, vbscript)
+			VBScriptJSON.VBScript = append(VBScriptJSON.VBScript, vbscript)
 		}
 
-		jsonBytes, err := json.Marshal(VBScriptJson)
+		jsonBytes, err := json.Marshal(VBScriptJSON)
 		if err != nil {
 			fmt.Println("JSON Marshal error:", err)
 		}
 
 		out := new(bytes.Buffer)
-		// プリフィックスなし、スペース4つでインデント
 		json.Indent(out, jsonBytes, "", " ")
 		fmt.Println(out.String())
 
