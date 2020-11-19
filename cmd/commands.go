@@ -22,6 +22,7 @@ var rootCmd = &cobra.Command{
 			vbscript := domain.VBScript{}
 
 			internal.Read(arg, &vbscript)
+			fmt.Printf("File Name: %s\n", arg)
 			fmt.Printf("CognitiveComplexity: %d\n", vbscript.CognitiveComplexity)
 			fmt.Printf("%+v\n", vbscript)
 		}
