@@ -9,21 +9,16 @@ import (
 	"github.com/st-tech/search-tools/2020internship-yoshikawa/src/internal"
 )
 
-type Options struct {
-	optionDirectory string
-}
-
-var (
-	o = &Options{}
-)
-
 var directoryCommand = &cobra.Command{
 	Use:   "directory",
 	Short: "calculate files inside the directory",
-	Run: func(cmd *cobra.Command, args []string) {
+	Args:  cobra.RangeArgs(1, 1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if len(args) == 0 {
+			return nil
+		}
 
-		fmt.Println(o.optionDirectory)
-		files := internal.DirectoryInternalFiles(o.optionDirectory)
+		files := internal.DirectoryInternalFiles(args[0])
 
 		for _, file := range files {
 			vbscript := domain.VBScript{}
@@ -35,14 +30,14 @@ var directoryCommand = &cobra.Command{
 
 			if isVBScript {
 				internal.Read(file, &vbscript)
-				fmt.Printf("CognitiveComplexity: %d\n", vbscript.CognitiveComplexity)
 				fmt.Printf("%+v\n", vbscript)
 			}
 		}
+
+		return nil
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(directoryCommand)
-	directoryCommand.Flags().StringVarP(&o.optionDirectory, "dir", "d", "directory", "directory option")
 }
