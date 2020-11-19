@@ -1,6 +1,8 @@
 package cmd
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
 	"regexp"
 
@@ -19,7 +21,7 @@ var directoryCommand = &cobra.Command{
 		}
 
 		files := internal.DirectoryInternalFiles(args[0])
-		json := domain.VBScriptJson{}
+		VBScriptJson := domain.VBScriptJson{}
 
 		for _, file := range files {
 			vbscript := domain.VBScript{}
@@ -33,10 +35,18 @@ var directoryCommand = &cobra.Command{
 				internal.Read(file, &vbscript)
 				fmt.Printf("%+v\n", vbscript)
 			}
-			json.VBScript = append(json.VBScript, vbscript)
+			VBScriptJson.VBScript = append(VBScriptJson.VBScript, vbscript)
 		}
 
-		fmt.Println(json.VBScript)
+		jsonBytes, err := json.Marshal(VBScriptJson)
+		if err != nil {
+			fmt.Println("JSON Marshal error:", err)
+		}
+
+		out := new(bytes.Buffer)
+		// プリフィックスなし、スペース4つでインデント
+		json.Indent(out, jsonBytes, "", " ")
+		fmt.Println(out.String())
 
 		return nil
 	},
