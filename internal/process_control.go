@@ -9,7 +9,6 @@ import (
 
 // CountControlFlow is to count Control Flow statements.
 func CountControlFlow(vbscript *domain.VBScript, str string) {
-
 	isIf, err := regexp.MatchString(domain.VBScriptIfPattern, str)
 	if err != nil {
 		fmt.Printf("err: %v", err)

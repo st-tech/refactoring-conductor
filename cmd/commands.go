@@ -12,19 +12,19 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   "cog [file name]",
 	Short: "Command line cognitive complexity",
-	Args:  cobra.RangeArgs(1, 1),
+	Args:  cobra.RangeArgs(1, 10),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if len(args) == 0 {
 			return nil
 		}
 
-		vbscript := domain.VBScript{}
+		for _, arg := range args {
+			vbscript := domain.VBScript{}
 
-		internal.Read(args[0], &vbscript)
-
-		fmt.Printf("CognitiveComplexity: %d\n", vbscript.CognitiveComplexity)
-
-		fmt.Printf("%v\n", vbscript)
+			internal.Read(arg, &vbscript)
+			fmt.Printf("CognitiveComplexity: %d\n", vbscript.CognitiveComplexity)
+			fmt.Printf("%+v\n", vbscript)
+		}
 
 		return nil
 	},
