@@ -19,6 +19,7 @@ var directoryCommand = &cobra.Command{
 		}
 
 		files := internal.DirectoryInternalFiles(args[0])
+		json := domain.VBScriptJson{}
 
 		for _, file := range files {
 			vbscript := domain.VBScript{}
@@ -32,7 +33,10 @@ var directoryCommand = &cobra.Command{
 				internal.Read(file, &vbscript)
 				fmt.Printf("%+v\n", vbscript)
 			}
+			json.VBScript = append(json.VBScript, vbscript)
 		}
+
+		fmt.Println(json.VBScript)
 
 		return nil
 	},
