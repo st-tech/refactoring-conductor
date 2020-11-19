@@ -2,11 +2,11 @@ package domain
 
 // VBScriptControlFlowPattern defines the VBScript control flow pattern.
 const (
-	VBScriptIfPattern          = `(?i)(If )`
-	VBScriptElsePattern        = `(?i)(Else|ElseIf)`
-	VBScriptEndIfPattern       = `(?i)(End if)`
-	VBScriptFunctionPattern    = `(?i)(Function)`
-	VBScriptEndFunctionPattern = `(?i)(End Function)`
+	VBScriptIfPattern          = `(?i)^(\s*?)(\t*?)(If )`
+	VBScriptElsePattern        = `(?i)^(\s*?)(\t*?)(Else|ElseIf)`
+	VBScriptEndIfPattern       = `(?i)^(\s*?)(\t*?)(End if)`
+	VBScriptFunctionPattern    = `(?i)^(\s*?)(\t*?)(Function)`
+	VBScriptEndFunctionPattern = `(?i)^(\s*?)(\t*?)(End Function)`
 	VBScriptProcedurePattern   = `[\r\n](\s*?)(private|public)?\s*(function|sub|property +(get|set|let))\s\[?([^(\r\n\]]+).*?[\r\n]([\s\S]*?)end +(function|sub|Property)`
 )
 
