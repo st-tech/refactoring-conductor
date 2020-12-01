@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"regexp"
 
-	"github.com/st-tech/search-tools/2020internship-yoshikawa/src/domain"
+	"github.com/st-tech/refactoring-conductor/domain"
 )
 
 // CountControlFlow is to count Control Flow statements.

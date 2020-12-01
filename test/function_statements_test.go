@@ -3,8 +3,8 @@ package test_test
 import (
 	"testing"
 
-	"github.com/st-tech/search-tools/2020internship-yoshikawa/src/domain"
-	"github.com/st-tech/search-tools/2020internship-yoshikawa/src/internal"
+	"github.com/st-tech/refactoring-conductor/domain"
+	"github.com/st-tech/refactoring-conductor/internal"
 )
 
 func TestFunctionStatements(t *testing.T) {

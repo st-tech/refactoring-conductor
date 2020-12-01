@@ -7,8 +7,8 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
-	"github.com/st-tech/search-tools/2020internship-yoshikawa/src/domain"
-	"github.com/st-tech/search-tools/2020internship-yoshikawa/src/internal"
+	"github.com/st-tech/refactoring-conductor/domain"
+	"github.com/st-tech/refactoring-conductor/internal"
 )
 
 var rootCmd = &cobra.Command{

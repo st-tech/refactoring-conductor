@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/st-tech/search-tools/2020internship-yoshikawa/src/domain"
+	"github.com/st-tech/refactoring-conductor/domain"
 )
 
 // Read is to read file and scan it line by line.
