@@ -45,4 +45,5 @@ Everyone interacting in this project’s codebases, issue trackers, chat rooms a
 
 ## License
 
-Copyright &copy; ZOZO Technologies, Inc. Released under the [Apache License 2.0](./LICENSE)
+Copyright &copy; ZOZO Technologies, Inc. Originally created by [Taiki Yoshikawa](http://github.com/yoshikawa).  
+Released under the [Apache License 2.0](./LICENSE)
