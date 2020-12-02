@@ -1,6 +1,6 @@
 # Refactoring Conductor
 
-Refactoring Conductor is a CLI tool written Go for performing static analysis.
+Refactoring Conductor is a CLI tool written in Go for performing static analysis.
 Focusing on visualising complexity of code, using [Cognitive Complexity](https://docs.codeclimate.com/docs/cognitive-complexity) as indicator value.
 
 ## Usage
@@ -45,5 +45,5 @@ Everyone interacting in this project’s codebases, issue trackers, chat rooms a
 
 ## License
 
-Copyright &copy; ZOZO Technologies, Inc. Originally created by [Taiki Yoshikawa](http://github.com/yoshikawa).
+Copyright &copy; ZOZO Technologies, Inc. Originally created by [Taiki Yoshikawa](http://github.com/yoshikawa).  
 Released under the [Apache License 2.0](./LICENSE)
