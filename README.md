@@ -1,6 +1,6 @@
 # Refactoring Conductor
 
-Refactoring conductor is a CLI tool to do static analysis made by Go.
+Refactoring Conductor is a CLI tool written in Go for performing static analysis.
 Focusing on visualising complexity of code, using [Cognitive Complexity](https://docs.codeclimate.com/docs/cognitive-complexity) as indicator value.
 
 ## Usage
@@ -33,7 +33,7 @@ $ go test -v ./test
 
 ## Note
 
-Currently this tool is working only with VBScript/VB.Net and supporting only if statement. Other operators and languages are working in progress.
+Currently, this tool only works with VBScript/VB.Net and only supports **if-statement**. Other operators and languages are working in progress.
 
 ## Contributing
 
