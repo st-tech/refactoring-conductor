@@ -8,7 +8,7 @@ Focusing on visualising complexity of code, using [Cognitive Complexity](https:/
 ### Single File Analysis
 
 ```sh
-$ go run main.go path/to/file.vbs
+$ go run main.go single path/to/file.vbs
 ```
 
 ### Multi File Analysis

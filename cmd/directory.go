@@ -12,7 +12,7 @@ import (
 )
 
 var directoryCommand = &cobra.Command{
-	Use:   "directory",
+	Use:   "directory [path to directory]",
 	Short: "calculate files inside the directory",
 	Args:  cobra.RangeArgs(1, 1),
 	RunE: func(cmd *cobra.Command, args []string) error {
