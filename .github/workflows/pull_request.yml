@@ -1,4 +1,4 @@
-name: Go CLI on PullRequest
+name: Go test/lint
 
 on:
   pull_request:
