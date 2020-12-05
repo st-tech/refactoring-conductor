@@ -35,7 +35,10 @@ var singleFileCmd = &cobra.Command{
 		}
 
 		out := new(bytes.Buffer)
-		json.Indent(out, jsonBytes, "", " ")
+		err = json.Indent(out, jsonBytes, "", " ")
+		if err != nil {
+			fmt.Println("JSON Indent error:", err)
+		}
 		fmt.Println(out.String())
 
 		return nil

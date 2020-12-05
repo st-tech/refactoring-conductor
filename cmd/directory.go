@@ -22,15 +22,13 @@ var directoryCommand = &cobra.Command{
 
 		files := internal.DirectoryInternalFiles(args[0])
 		VBScriptJSON := domain.VBScriptJSON{}
+		VBScriptFileExtensionPattern := regexp.MustCompile(domain.VBScriptFileExtension)
 
 		for _, file := range files {
 			vbscript := domain.VBScript{}
 			vbscript.FileName = file
 
-			isVBScript, err := regexp.MatchString(domain.VBScriptFileExtension, file)
-			if err != nil {
-				fmt.Printf("err: %v", err)
-			}
+			isVBScript := VBScriptFileExtensionPattern.MatchString(file)
 
 			if isVBScript {
 				internal.Read(file, &vbscript)
@@ -44,7 +42,10 @@ var directoryCommand = &cobra.Command{
 		}
 
 		out := new(bytes.Buffer)
-		json.Indent(out, jsonBytes, "", " ")
+		err = json.Indent(out, jsonBytes, "", " ")
+		if err != nil {
+			fmt.Println("JSON Indent error:", err)
+		}
 		fmt.Println(out.String())
 
 		return nil
