@@ -1,0 +1,26 @@
+name: Go CLI on PullRequest
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  golangci:
+    name: lint
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        go:
+          - 1.15
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Go
+        uses: actions/setup-go@v1
+        with:
+          version: ${{ matrix.go }}
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v2
+        with:
+          version: v1.33
+      - name: go test
+        run: go test -race -v ./test
