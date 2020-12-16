@@ -1,3 +1,5 @@
+![Go test/lint](https://github.com/st-tech/refactoring-conductor/workflows/Go%20test/lint/badge.svg)
+
 # Refactoring Conductor
 
 Refactoring Conductor is a CLI tool written in Go for performing static analysis.
@@ -20,6 +22,7 @@ $ go run main.go directory path/to/directory/
 ### Other usages
 
 To see all the usages use help command.
+
 ```sh
 $ go run main.go --help
 ```
@@ -27,6 +30,7 @@ $ go run main.go --help
 ## Testing
 
 To run test
+
 ```sh
 $ go test -v ./test
 ```
