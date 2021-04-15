@@ -18,6 +18,7 @@ type VBScriptJSON struct {
 	VBScript []VBScript
 }
 
+// Cognitive is to set state of cognitive complexity
 type Cognitive struct {
 	NestState           int `json:"-"`
 	CognitiveComplexity int `json:"cognitive_complexity"`
