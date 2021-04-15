@@ -51,13 +51,13 @@ func CountControlFlow(vbscript *domain.VBScript, str string) {
 	if vbscript.IsBeginFunction {
 		if isEndIf {
 			vbscript.EndNest()
-			vbscript.Functions[len(vbscript.Functions)-1].EndNest()
+			getLastFunction(vbscript).EndNest()
 		} else if isIf && !isElse {
 			vbscript.BeginNest()
-			vbscript.Functions[len(vbscript.Functions)-1].BeginNest()
+			getLastFunction(vbscript).BeginNest()
 		} else if isElse {
 			vbscript.Increment()
-			vbscript.Functions[len(vbscript.Functions)-1].Increment()
+			getLastFunction(vbscript).Increment()
 		}
 	} else { // Function外の計算を行う
 		if isEndIf {
@@ -68,4 +68,8 @@ func CountControlFlow(vbscript *domain.VBScript, str string) {
 			vbscript.Increment()
 		}
 	}
+}
+
+func getLastFunction(vbscript *domain.VBScript) *domain.Function {
+	return &vbscript.Functions[len(vbscript.Functions)-1]
 }
