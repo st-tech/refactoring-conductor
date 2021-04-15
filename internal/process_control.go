@@ -50,28 +50,22 @@ func CountControlFlow(vbscript *domain.VBScript, str string) {
 
 	if vbscript.IsBeginFunction {
 		if isEndIf {
-			vbscript.NestState--
-			vbscript.Functions[len(vbscript.Functions)-1].NestState--
+			vbscript.EndNest()
+			vbscript.Functions[len(vbscript.Functions)-1].EndNest()
 		} else if isIf && !isElse {
-			vbscript.CognitiveComplexity++
-			vbscript.CognitiveComplexity += vbscript.NestState
-			vbscript.NestState++
-			vbscript.Functions[len(vbscript.Functions)-1].CognitiveComplexity++
-			vbscript.Functions[len(vbscript.Functions)-1].CognitiveComplexity += vbscript.Functions[len(vbscript.Functions)-1].NestState
-			vbscript.Functions[len(vbscript.Functions)-1].NestState++
+			vbscript.BeginNest()
+			vbscript.Functions[len(vbscript.Functions)-1].BeginNest()
 		} else if isElse {
-			vbscript.CognitiveComplexity++
-			vbscript.Functions[len(vbscript.Functions)-1].CognitiveComplexity++
+			vbscript.Increment()
+			vbscript.Functions[len(vbscript.Functions)-1].Increment()
 		}
 	} else { // Function外の計算を行う
 		if isEndIf {
-			vbscript.NestState--
+			vbscript.EndNest()
 		} else if isIf && !isElse {
-			vbscript.CognitiveComplexity++
-			vbscript.CognitiveComplexity += vbscript.NestState
-			vbscript.NestState++
+			vbscript.BeginNest()
 		} else if isElse {
-			vbscript.CognitiveComplexity++
+			vbscript.Increment()
 		}
 	}
 }
