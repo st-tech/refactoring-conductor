@@ -39,9 +39,11 @@ func CountControlFlow(vbscript *domain.VBScript, str string) {
 	} else if isFunction && !isEndFunction {
 		vbscript.IsBeginFunction = true
 		slice := domain.Function{
-			NestState:           0,
-			CognitiveComplexity: 0,
-			FunctionName:        str,
+			Cognitive: domain.Cognitive{
+				NestState:           0,
+				CognitiveComplexity: 0,
+			},
+			FunctionName: str,
 		}
 		vbscript.Functions = append(vbscript.Functions, slice)
 	}
