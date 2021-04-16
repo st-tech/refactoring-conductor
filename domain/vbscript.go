@@ -9,7 +9,6 @@ const (
 	VBScriptNextPattern        = `(?i)^(\s*?)(\t*?)(Next)($|(\s+?)(\t+?))`
 	VBScriptFunctionPattern    = `(?i)^(\s*?)(\t*?)(Function)`
 	VBScriptEndFunctionPattern = `(?i)^(\s*?)(\t*?)(End Function)`
-	VBScriptProcedurePattern   = `[\r\n](\s*?)(private|public)?\s*(function|sub|property +(get|set|let))\s\[?([^(\r\n\]]+).*?[\r\n]([\s\S]*?)end +(function|sub|Property)`
 )
 
 // VBScriptFileExtension defines the VBSCript file extensions.
