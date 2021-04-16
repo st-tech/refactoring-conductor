@@ -9,21 +9,6 @@ import (
 
 // CountControlFlow is to count Control Flow statements.
 func CountControlFlow(vbscript *domain.VBScript, str string) {
-	isIf, err := regexp.MatchString(domain.VBScriptIfPattern, str)
-	if err != nil {
-		fmt.Printf("err: %v", err)
-	}
-
-	isElse, err := regexp.MatchString(domain.VBScriptElsePattern, str)
-	if err != nil {
-		fmt.Printf("err: %v", err)
-	}
-
-	isEndIf, err := regexp.MatchString(domain.VBScriptEndIfPattern, str)
-	if err != nil {
-		fmt.Printf("err: %v", err)
-	}
-
 	isFunction, err := regexp.MatchString(domain.VBScriptFunctionPattern, str)
 	if err != nil {
 		fmt.Printf("err: %v", err)
@@ -39,37 +24,74 @@ func CountControlFlow(vbscript *domain.VBScript, str string) {
 	} else if isFunction && !isEndFunction {
 		vbscript.IsBeginFunction = true
 		slice := domain.Function{
-			NestState:           0,
-			CognitiveComplexity: 0,
-			FunctionName:        str,
+			Cognitive: domain.Cognitive{
+				NestState:           0,
+				CognitiveComplexity: 0,
+			},
+			FunctionName: str,
 		}
 		vbscript.Functions = append(vbscript.Functions, slice)
 	}
 
 	if vbscript.IsBeginFunction {
-		if isEndIf {
-			vbscript.NestState--
-			vbscript.Functions[len(vbscript.Functions)-1].NestState--
-		} else if isIf && !isElse {
-			vbscript.CognitiveComplexity++
-			vbscript.CognitiveComplexity += vbscript.NestState
-			vbscript.NestState++
-			vbscript.Functions[len(vbscript.Functions)-1].CognitiveComplexity++
-			vbscript.Functions[len(vbscript.Functions)-1].CognitiveComplexity += vbscript.Functions[len(vbscript.Functions)-1].NestState
-			vbscript.Functions[len(vbscript.Functions)-1].NestState++
-		} else if isElse {
-			vbscript.CognitiveComplexity++
-			vbscript.Functions[len(vbscript.Functions)-1].CognitiveComplexity++
+		if isEndNestStatement(str) {
+			vbscript.EndNest()
+			getLastFunction(vbscript).EndNest()
+		} else if isBeginNestStatement(str) {
+			vbscript.BeginNest()
+			getLastFunction(vbscript).BeginNest()
+		} else if isIncrementStatement(str) {
+			vbscript.Increment()
+			getLastFunction(vbscript).Increment()
 		}
 	} else { // Function外の計算を行う
-		if isEndIf {
-			vbscript.NestState--
-		} else if isIf && !isElse {
-			vbscript.CognitiveComplexity++
-			vbscript.CognitiveComplexity += vbscript.NestState
-			vbscript.NestState++
-		} else if isElse {
-			vbscript.CognitiveComplexity++
+		if isEndNestStatement(str) {
+			vbscript.EndNest()
+		} else if isBeginNestStatement(str) {
+			vbscript.BeginNest()
+		} else if isIncrementStatement(str) {
+			vbscript.Increment()
 		}
 	}
+}
+
+func getLastFunction(vbscript *domain.VBScript) *domain.Function {
+	return &vbscript.Functions[len(vbscript.Functions)-1]
+}
+
+func isBeginNestStatement(str string) bool {
+	isIf, err := regexp.MatchString(domain.VBScriptIfPattern, str)
+	if err != nil {
+		fmt.Printf("err: %v", err)
+	}
+
+	isFor, err := regexp.MatchString(domain.VBScriptForPattern, str)
+	if err != nil {
+		fmt.Printf("err: %v", err)
+	}
+
+	return isIf || isFor
+}
+
+func isEndNestStatement(str string) bool {
+	isEndIf, err := regexp.MatchString(domain.VBScriptEndIfPattern, str)
+	if err != nil {
+		fmt.Printf("err: %v", err)
+	}
+
+	isNext, err := regexp.MatchString(domain.VBScriptNextPattern, str)
+	if err != nil {
+		fmt.Printf("err: %v", err)
+	}
+
+	return isEndIf || isNext
+}
+
+func isIncrementStatement(str string) bool {
+	isElse, err := regexp.MatchString(domain.VBScriptElsePattern, str)
+	if err != nil {
+		fmt.Printf("err: %v", err)
+	}
+
+	return isElse
 }
