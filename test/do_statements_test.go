@@ -17,7 +17,7 @@ func TestDoStatements(t *testing.T) {
 		{"testdata/do/do_until.vbs", 1},
 		{"testdata/do/do_nest.vbs", 3},
 		{"testdata/do/do_multi.vbs", 2},
-		{"testdata/do/do_whiltespace.vbs", 2},
+		{"testdata/do/do_whitespace.vbs", 2},
 		{"testdata/do/do_triple_nest.vbs", 6},
 	}
 	for _, test := range tests {
