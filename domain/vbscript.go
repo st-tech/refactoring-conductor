@@ -7,6 +7,8 @@ const (
 	VBScriptEndIfPattern       = `(?i)^(\s*?)(\t*?)(End if)`
 	VBScriptForPattern         = `(?i)^(\s*?)(\t*?)(For )`
 	VBScriptNextPattern        = `(?i)^(\s*?)(\t*?)(Next)($|(\s+?)(\t+?))`
+	VBScriptDoPattern          = `(?i)^(\s*?)(\t*?)(Do)($|(\s+?)|(\t+?)| While | Until )`
+	VBScriptLoopPattern        = `(?i)^(\s*?)(\t*?)(Loop)($|(\s+?)|(\t+?)| While | Until )`
 	VBScriptFunctionPattern    = `(?i)^(\s*?)(\t*?)(Function)`
 	VBScriptEndFunctionPattern = `(?i)^(\s*?)(\t*?)(End Function)`
 	VBScriptProcedurePattern   = `[\r\n](\s*?)(private|public)?\s*(function|sub|property +(get|set|let))\s\[?([^(\r\n\]]+).*?[\r\n]([\s\S]*?)end +(function|sub|Property)`
