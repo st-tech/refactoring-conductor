@@ -75,7 +75,12 @@ func isBeginNestStatement(str string) bool {
 		fmt.Printf("err: %v", err)
 	}
 
-	return isIf || isFor || isDo
+	isWhile, err := regexp.MatchString(domain.VBScriptWhilePattern, str)
+	if err != nil {
+		fmt.Printf("err: %v", err)
+	}
+
+	return isIf || isFor || isDo || isWhile
 }
 
 func isEndNestStatement(str string) bool {
@@ -94,7 +99,12 @@ func isEndNestStatement(str string) bool {
 		fmt.Printf("err: %v", err)
 	}
 
-	return isEndIf || isNext || isLoop
+	isWhileEnd, err := regexp.MatchString(domain.VBScriptWhileEndPattern, str)
+	if err != nil {
+		fmt.Printf("err: %v", err)
+	}
+
+	return isEndIf || isNext || isLoop || isWhileEnd
 }
 
 func isIncrementStatement(str string) bool {
