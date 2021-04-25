@@ -16,6 +16,7 @@ func TestForStatements(t *testing.T) {
 		{"testdata/for/for_multi.vbs", 2},
 		{"testdata/for/for_nest.vbs", 3},
 		{"testdata/for/for_triple_nest.vbs", 6},
+		{"testdata/for/for_whitespace.vbs", 2},
 	}
 	for _, test := range tests {
 		vbscript := domain.VBScript{}
