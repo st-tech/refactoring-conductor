@@ -9,6 +9,8 @@ const (
 	VBScriptNextPattern        = `(?i)^(\s*?)(\t*?)(Next)($|(\s+?)|(\t+?))`
 	VBScriptDoPattern          = `(?i)^(\s*?)(\t*?)(Do)($|(\s+?)|(\t+?)| While | Until )`
 	VBScriptLoopPattern        = `(?i)^(\s*?)(\t*?)(Loop)($|(\s+?)|(\t+?)| While | Until )`
+	VBScriptWhilePattern       = `(?i)^(\s*?)(\t*?)(While )`
+	VBScriptWhileEndPattern    = `(?i)^(\s*?)(\t*?)(End While|Wend)`
 	VBScriptFunctionPattern    = `(?i)^(\s*?)(\t*?)(Private |Public (Default )?)?(Function|Sub)`
 	VBScriptEndFunctionPattern = `(?i)^(\s*?)(\t*?)(End (Function|Sub))`
 )
