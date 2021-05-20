@@ -11,6 +11,8 @@ const (
 	VBScriptLoopPattern        = `(?i)^(\s*?)(\t*?)(Loop)($|(\s+?)|(\t+?)| While | Until )`
 	VBScriptWhilePattern       = `(?i)^(\s*?)(\t*?)(While )`
 	VBScriptWhileEndPattern    = `(?i)^(\s*?)(\t*?)(End While|Wend)`
+	VBScriptSelectPattern      = `(?i)^(\s*?)(\t*?)(Select Case )`
+	VBScriptEndSelectPattern   = `(?i)^(\s*?)(\t*?)(End Select)($|(\s+?)|(\t+?))`
 	VBScriptFunctionPattern    = `(?i)^(\s*?)(\t*?)(Private |Public (Default )?)?(Function|Sub)`
 	VBScriptEndFunctionPattern = `(?i)^(\s*?)(\t*?)(End (Function|Sub))`
 )
