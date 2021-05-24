@@ -68,7 +68,7 @@ func isBeginNestStatement(str string) bool {
 		domain.VBScriptSelectPattern,
 	}
 
-	return isMatchStatement(str, patterns)
+	return isMatchString(str, patterns)
 }
 
 func isEndNestStatement(str string) bool {
@@ -80,7 +80,7 @@ func isEndNestStatement(str string) bool {
 		domain.VBScriptEndSelectPattern,
 	}
 
-	return isMatchStatement(str, patterns)
+	return isMatchString(str, patterns)
 }
 
 func isIncrementStatement(str string) bool {
@@ -88,10 +88,10 @@ func isIncrementStatement(str string) bool {
 		domain.VBScriptElsePattern,
 	}
 
-	return isMatchStatement(str, patterns)
+	return isMatchString(str, patterns)
 }
 
-func isMatchStatement(line string, patterns []string) bool {
+func isMatchString(line string, patterns []string) bool {
 	for _, pattern := range patterns {
 		isMatch, err := regexp.MatchString(pattern, line)
 		if err != nil {
