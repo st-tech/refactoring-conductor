@@ -60,68 +60,48 @@ func getLastFunction(vbscript *domain.VBScript) *domain.Function {
 }
 
 func isBeginNestStatement(str string) bool {
-	isIf, err := regexp.MatchString(domain.VBScriptIfPattern, str)
-	if err != nil {
-		fmt.Printf("err: %v", err)
+	patterns := []string{
+		domain.VBScriptIfPattern,
+		domain.VBScriptForPattern,
+		domain.VBScriptDoPattern,
+		domain.VBScriptWhilePattern,
+		domain.VBScriptSelectPattern,
 	}
 
-	isFor, err := regexp.MatchString(domain.VBScriptForPattern, str)
-	if err != nil {
-		fmt.Printf("err: %v", err)
-	}
-
-	isDo, err := regexp.MatchString(domain.VBScriptDoPattern, str)
-	if err != nil {
-		fmt.Printf("err: %v", err)
-	}
-
-	isWhile, err := regexp.MatchString(domain.VBScriptWhilePattern, str)
-	if err != nil {
-		fmt.Printf("err: %v", err)
-	}
-
-	isSelect, err := regexp.MatchString(domain.VBScriptSelectPattern, str)
-	if err != nil {
-		fmt.Printf("err: %v", err)
-	}
-
-	return isIf || isFor || isDo || isWhile || isSelect
+	return isMatchStatement(str, patterns)
 }
 
 func isEndNestStatement(str string) bool {
-	isEndIf, err := regexp.MatchString(domain.VBScriptEndIfPattern, str)
-	if err != nil {
-		fmt.Printf("err: %v", err)
+	patterns := []string{
+		domain.VBScriptEndIfPattern,
+		domain.VBScriptNextPattern,
+		domain.VBScriptLoopPattern,
+		domain.VBScriptWhileEndPattern,
+		domain.VBScriptEndSelectPattern,
 	}
 
-	isNext, err := regexp.MatchString(domain.VBScriptNextPattern, str)
-	if err != nil {
-		fmt.Printf("err: %v", err)
-	}
-
-	isLoop, err := regexp.MatchString(domain.VBScriptLoopPattern, str)
-	if err != nil {
-		fmt.Printf("err: %v", err)
-	}
-
-	isWhileEnd, err := regexp.MatchString(domain.VBScriptWhileEndPattern, str)
-	if err != nil {
-		fmt.Printf("err: %v", err)
-	}
-
-	isEndSelect, err := regexp.MatchString(domain.VBScriptEndSelectPattern, str)
-	if err != nil {
-		fmt.Printf("err: %v", err)
-	}
-
-	return isEndIf || isNext || isLoop || isWhileEnd || isEndSelect
+	return isMatchStatement(str, patterns)
 }
 
 func isIncrementStatement(str string) bool {
-	isElse, err := regexp.MatchString(domain.VBScriptElsePattern, str)
-	if err != nil {
-		fmt.Printf("err: %v", err)
+	patterns := []string{
+		domain.VBScriptElsePattern,
 	}
 
-	return isElse
+	return isMatchStatement(str, patterns)
+}
+
+func isMatchStatement(line string, patterns []string) bool {
+	for _, pattern := range patterns {
+		isMatch, err := regexp.MatchString(pattern, line)
+		if err != nil {
+			fmt.Printf("err: %v", err)
+		}
+
+		if isMatch {
+			return true
+		}
+	}
+
+	return false
 }
