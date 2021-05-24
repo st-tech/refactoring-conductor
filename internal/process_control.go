@@ -76,7 +76,7 @@ func isEndNestStatement(str string) bool {
 		domain.VBScriptEndIfPattern,
 		domain.VBScriptNextPattern,
 		domain.VBScriptLoopPattern,
-		domain.VBScriptWhileEndPattern,
+		domain.VBScriptEndWhilePattern,
 		domain.VBScriptEndSelectPattern,
 	}
 
